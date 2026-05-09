@@ -12,3 +12,6 @@ obj/
 [Rr]elease/  
 # NuGet  
 packages/  
+
+# Nested frontend repository
+10.2.0/angular/

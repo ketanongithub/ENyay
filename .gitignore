@@ -1,0 +1,14 @@
+# SQL Server database files  
+*.ldf  
+*.mdf  
+# Visual Studio  
+bin/  
+obj/  
+.vs/  
+*.suo  
+*.user  
+# Build results  
+[Dd]ebug/  
+[Rr]elease/  
+# NuGet  
+packages/  

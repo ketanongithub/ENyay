@@ -1,0 +1,91 @@
+<div [@routerTransition]>
+    <app-breadcrumbs [trail]="[
+        { label: 'Admin', icon: 'fas fa-home' },
+        { label: 'Dashboard' }
+    ]"></app-breadcrumbs>
+
+    <app-page-header title="Admin Dashboard"></app-page-header>
+    <section class="content px-2 pb-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ totalInmates }}</h3>
+                            <p>Total Inmates</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ pendingApprovals }}</h3>
+                            <p>Pending Approvals</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ activeCalls }}</h3>
+                            <p>Active Calls</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>&#8377;{{ walletBalance | number }}</h3>
+                            <p>Wallet Balance</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Requests</h3>
+                </div>
+                <div class="card-body table-responsive">
+                    <p-table [value]="recentRequests" [tableStyle]="{ 'min-width': '40rem' }">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Inmate Name</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-record>
+                            <tr>
+                                <td>{{ record.id }}</td>
+                                <td>{{ record.inmateName }}</td>
+                                <td>{{ record.type }}</td>
+                                <td>{{ record.date }}</td>
+                                <td>
+                                    <app-status-badge [status]="record.status"></app-status-badge>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

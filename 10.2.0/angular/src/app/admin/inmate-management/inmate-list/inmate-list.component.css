@@ -1,0 +1,81 @@
+.inmate-grid {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(20, 30, 70, 0.04);
+}
+
+.inmate-grid :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td,
+.inmate-grid :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    border-color: #eef1f7;
+}
+
+.inmate-grid :host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+    background-color: #f5f8ff;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.row-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.row-identity .meta {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.row-identity .meta .name {
+    color: #1a3c7a;
+    font-weight: 600;
+}
+
+.row-identity .meta .alias {
+    color: #95a0b8;
+    font-size: 0.78rem;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eef1f7;
+    background: #fafbff;
+}
+
+.toolbar .search {
+    flex: 1;
+    max-width: 360px;
+}
+
+.action-group {
+    display: inline-flex;
+    gap: 0.25rem;
+}
+
+.action-group .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+.col-id {
+    color: #5f6877;
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.85rem;
+}

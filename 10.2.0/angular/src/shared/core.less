@@ -1,0 +1,282 @@
+@media (min-width: 576px) {
+    .nav-user-menu .user-image {
+        float: none;
+        line-height: 10px;
+        margin-top: -8px;
+    }
+}
+
+.nav-user-menu .user-image {
+    border-radius: 50%;
+    float: left;
+    height: 2rem;
+    margin-top: -4px;
+    width: 2rem;
+}
+
+.form-group.required .col-form-label:after {
+    color: #d00;
+    content: '*';
+    position: absolute;
+    margin-left: 3px;
+}
+
+/* Sweet alert */
+.swal2-title:empty {
+    display: none !important;
+}
+
+body.swal2-height-auto {
+    height: inherit !important;
+}
+
+.swal2-popup.swal2-toast {
+    padding: 10px 12px !important;
+    display: block !important;
+}
+
+.swal2-popup.swal2-toast .swal2-header,
+.swal2-popup.swal2-toast .swal2-title,
+.swal2-popup.swal2-toast .swal2-content {
+    text-align: left !important;
+    margin: 0 !important;
+}
+
+.swal2-popup.swal2-toast .swal2-title {
+    margin-bottom: 4px !important;
+}
+
+div.wrapper,
+div.content-wrapper,
+div.sidebar {
+    min-height: 100vh;
+}
+
+table.table {
+    * {
+        font-size: 14px !important;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        vertical-align: middle;
+    }
+}
+
+.table-wrapper * {
+    font-size: 14px !important;
+}
+
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last,
+.p-paginator .p-paginator-current {
+    color: #6c757d !important;
+}
+
+/* Login screen — eNyay Path brand banner (replaces ProRippleTalk wordmark). */
+.login-logo.enyay-login-logo {
+    margin-bottom: 1.5rem;
+
+    a {
+        display: inline-block;
+    }
+
+    .enyay-login-image {
+        width: auto;
+        max-width: 360px;
+        height: 110px;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+}
+
+/* ---------------------------------------------------------------- */
+/* AdminLTE sidebar — branded dark-navy theme                        */
+/* ---------------------------------------------------------------- */
+
+@sidebar-bg-top: #0f2247;
+@sidebar-bg-bottom: #14295c;
+@sidebar-group-bg: #1a3273;
+@sidebar-subpanel-bg: #0d1f44;
+@sidebar-text: #d6deef;
+@sidebar-text-muted: #9aa6c8;
+@sidebar-plus: #6ea4ff;
+@sidebar-active-bg: #2a64d8;
+@sidebar-active-text: #ffffff;
+@sidebar-divider: rgba(255, 255, 255, 0.08);
+
+aside.main-sidebar.sidebar-dark-primary {
+    background: linear-gradient(180deg, @sidebar-bg-top 0%, @sidebar-bg-bottom 100%) !important;
+    color: @sidebar-text;
+
+    .brand-link {
+        background: transparent !important;
+        border-bottom: 1px solid @sidebar-divider;
+        padding: 0.5rem 0.75rem !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        min-height: 78px;
+    }
+
+    /* eNyay Path full-banner logo (replaces the AdminLTE circular avatar).
+       Native aspect ratio is 221x71 (~3.11:1). At 60px tall the rendered
+       width is ~187px, which fits inside the ~250px sidebar with room
+       to breathe. */
+    .brand-link.enyay-brand-link .brand-image,
+    .brand-link .enyay-brand-image {
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        border-radius: 6px;
+        box-shadow: none !important;
+        width: auto !important;
+        max-width: 100%;
+        height: 60px;
+        max-height: 60px;
+        margin: 0 !important;
+        float: none !important;
+        opacity: 1 !important;
+        object-fit: contain;
+    }
+
+    .user-panel {
+        border-bottom: 1px solid @sidebar-divider;
+
+        .info > a {
+            color: #ffffff !important;
+            font-weight: 500;
+        }
+    }
+
+    /* Top-level link defaults */
+    .nav-sidebar > .nav-item {
+        margin: 2px 0;
+    }
+
+    .nav-sidebar .nav-link {
+        color: @sidebar-text;
+        border-radius: 0;
+        transition: background 0.15s ease, color 0.15s ease;
+        padding: 0.7rem 1rem;
+    }
+
+    .nav-sidebar .nav-link p {
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+    }
+
+    .nav-sidebar .nav-link .nav-icon {
+        color: @sidebar-text-muted;
+        width: 1.4rem;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .nav-sidebar .nav-link:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: #ffffff;
+    }
+
+    .nav-sidebar .nav-link:hover .nav-icon {
+        color: #ffffff;
+    }
+
+    /* Top-level *leaf* active state (Dashboard etc.) — pill style */
+    .nav-sidebar > .nav-item > .nav-link:not(.nav-group-toggle).active {
+        background: @sidebar-active-bg !important;
+        color: @sidebar-active-text !important;
+        margin: 0 8px;
+        border-radius: 8px;
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
+        box-shadow: 0 4px 12px rgba(42, 100, 216, 0.35);
+    }
+
+    .nav-sidebar > .nav-item > .nav-link:not(.nav-group-toggle).active .nav-icon {
+        color: @sidebar-active-text !important;
+    }
+
+    /* Group header (collapsible parent) */
+    .nav-sidebar .nav-group-toggle {
+        background: @sidebar-group-bg;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .nav-sidebar .nav-group-toggle .nav-icon {
+        color: #ffffff;
+    }
+
+    .nav-sidebar .nav-group-toggle:hover {
+        background: lighten(@sidebar-group-bg, 4%);
+    }
+
+    .nav-sidebar .nav-group-toggle p .right {
+        color: #ffffff;
+        font-size: 0.75rem;
+        opacity: 0.85;
+        transition: opacity 0.2s ease;
+    }
+
+    .nav-sidebar .nav-group-toggle:hover p .right {
+        opacity: 1;
+    }
+
+    /* Sub-menu container */
+    .nav-sidebar .nav-treeview {
+        background: @sidebar-subpanel-bg;
+        margin: 0;
+        padding: 6px 8px;
+    }
+
+    .nav-sidebar .nav-treeview > .nav-item {
+        margin: 2px 0;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link {
+        color: @sidebar-text;
+        padding: 0.55rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link p {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link .nav-icon {
+        color: @sidebar-plus;
+        font-size: 0.85rem;
+        width: 1.1rem;
+        font-weight: 700;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link:hover {
+        background: rgba(110, 164, 255, 0.12);
+        color: #ffffff;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link:hover .nav-icon {
+        color: #ffffff;
+    }
+
+    .nav-sidebar .nav-treeview .nav-link.active {
+        background: @sidebar-active-bg !important;
+        color: @sidebar-active-text !important;
+        box-shadow: 0 4px 12px rgba(42, 100, 216, 0.35);
+    }
+
+    .nav-sidebar .nav-treeview .nav-link.active .nav-icon {
+        color: @sidebar-active-text !important;
+    }
+}

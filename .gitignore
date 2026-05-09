@@ -12,3 +12,6 @@ obj/
 [Rr]elease/  
 # NuGet  
 packages/  
+
+# Local backup of Angular's former nested Git metadata
+.angular.git.backup/

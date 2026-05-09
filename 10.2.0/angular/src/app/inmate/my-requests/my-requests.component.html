@@ -1,0 +1,28 @@
+<div [@routerTransition]>
+    <h2 class="mb-4" style="color: #0d3b66; font-weight: 600">My Requests</h2>
+
+    <div class="card shadow-sm" style="border-radius: 16px">
+        <div class="card-body table-responsive">
+            <p-table [value]="requests" [tableStyle]="{ 'min-width': '40rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-record>
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.type }}</td>
+                        <td>{{ record.date }}</td>
+                        <td>
+                            <app-status-badge [status]="record.status"></app-status-badge>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<div [@routerTransition]>
+    <app-breadcrumbs [trail]="[
+        { label: 'Admin', link: ['/app/admin/dashboard'], icon: 'fas fa-home' },
+        { label: 'Inmate Management' }
+    ]"></app-breadcrumbs>
+
+    <app-page-header title="Inmate Management" subtitle="Manage inmates, family contacts and approvals">
+        <a class="btn bg-blue" [routerLink]="['/app/admin/inmate-management/new']">
+            <i class="fa fa-plus-square"></i>
+            Add / Update Inmate
+        </a>
+    </app-page-header>
+
+    <section class="content px-2 pb-3">
+        <div class="container-fluid">
+            <div class="inmate-grid">
+                <div class="toolbar">
+                    <div class="search input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn bg-blue" (click)="list()" title="Search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="keyword"
+                            placeholder="Search by name, prison ID, jail PID..."
+                            [(ngModel)]="keyword"
+                            (keyup.enter)="list()"
+                            appAutofocus />
+                    </div>
+                    <div class="text-muted small">
+                        {{ primengTableHelper.totalRecordsCount }} inmate(s)
+                    </div>
+                </div>
+                <p-table
+                    #dataTable
+                    [value]="primengTableHelper.records"
+                    [resizableColumns]="primengTableHelper.resizableColumns"
+                    styleClass="p-datatable-sm">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 28%">Inmate</th>
+                            <th style="width: 12%">Prison ID</th>
+                            <th style="width: 10%">Jail PID</th>
+                            <th style="width: 10%">Gender</th>
+                            <th style="width: 14%">Primary Contact</th>
+                            <th style="width: 10%">Wallet</th>
+                            <th style="width: 8%">Status</th>
+                            <th style="width: 8%">Actions</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-record>
+                        <tr>
+                            <td>
+                                <div class="row-identity">
+                                    <span
+                                        class="avatar"
+                                        [style.background]="avatarColor(record.id)">
+                                        {{ initials(record.fullName) }}
+                                    </span>
+                                    <span class="meta">
+                                        <span class="name">{{ record.fullName }}</span>
+                                        <span class="alias" *ngIf="record.aliasName">a.k.a. {{ record.aliasName }}</span>
+                                        <span class="alias" *ngIf="!record.aliasName">S/D of {{ record.fatherName }}</span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td><span class="col-id">{{ record.prisonId }}</span></td>
+                            <td><span class="col-id">{{ record.jailNo }}</span></td>
+                            <td>{{ record.gender }}</td>
+                            <td>{{ primaryContact(record) }}</td>
+                            <td>&#8377;{{ record.walletBalance | number:'1.0-0' }}</td>
+                            <td>
+                                <app-status-badge [status]="record.status"></app-status-badge>
+                            </td>
+                            <td>
+                                <div class="action-group" role="group" aria-label="Inmate actions">
+                                    <a
+                                        class="btn btn-sm btn-outline-secondary"
+                                        title="View"
+                                        [routerLink]="['/app/admin/inmate-management/edit', record.id]">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a
+                                        class="btn btn-sm btn-outline-primary"
+                                        title="Edit"
+                                        [routerLink]="['/app/admin/inmate-management/edit', record.id]">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-outline-danger"
+                                        title="Delete"
+                                        (click)="delete(record)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                No inmates match your search.
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </section>
+</div>

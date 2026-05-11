@@ -13,9 +13,10 @@ import { FooterComponent } from './layout/footer.component';
     imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent extends AppComponentBase implements OnInit {
-    private readonly renderer = inject(Renderer2);
-    private readonly layoutStore = inject(LayoutStoreService);
+    readonly layoutStore = inject(LayoutStoreService);
     readonly sidebarExpanded = this.layoutStore.sidebarExpanded;
+
+    private readonly renderer = inject(Renderer2);
 
     constructor(injector: Injector) {
         super(injector);

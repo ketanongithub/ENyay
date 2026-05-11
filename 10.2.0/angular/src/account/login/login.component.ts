@@ -14,13 +14,7 @@ import { MockInmateSessionService } from '@shared/services/mock-inmate-session.s
     templateUrl: './login.component.html',
     animations: [accountModuleAnimation()],
     standalone: true,
-    imports: [
-        FormsModule,
-        AbpValidationSummaryComponent,
-        RouterLink,
-        LocalizePipe,
-        AutofocusDirective,
-    ],
+    imports: [FormsModule, AbpValidationSummaryComponent, RouterLink, LocalizePipe, AutofocusDirective],
 })
 export class LoginComponent extends AppComponentBase {
     submitting = false;

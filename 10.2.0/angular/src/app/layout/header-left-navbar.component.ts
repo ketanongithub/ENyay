@@ -8,7 +8,7 @@ import { LayoutStoreService } from '@shared/layout/layout-store.service';
     standalone: true,
 })
 export class HeaderLeftNavbarComponent {
-    private readonly layoutStore = inject(LayoutStoreService);
+    readonly layoutStore = inject(LayoutStoreService);
     readonly sidebarExpanded = this.layoutStore.sidebarExpanded;
 
     toggleSidebar(): void {

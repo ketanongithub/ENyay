@@ -6,7 +6,9 @@ import { StatusClassPipe } from '@shared/pipes/status-class.pipe';
     standalone: true,
     imports: [StatusClassPipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `<span [class]="status() | statusClass">{{ status() }}</span>`,
+    template: `
+        <span [class]="status() | statusClass">{{ status() }}</span>
+    `,
 })
 export class StatusBadgeComponent {
     readonly status = input<string | null | undefined>('');

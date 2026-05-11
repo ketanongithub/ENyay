@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectorRef, output, inject } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -27,7 +27,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     ],
 })
 export class CreateUserDialogComponent extends AppComponentBase implements OnInit {
-    @Output() onSave = new EventEmitter<any>();
+    readonly onSave = output();
 
     saving = false;
     user = new CreateUserDto();

@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, EventEmitter, output, ChangeDetectorRef } from '@angular/core';
+import { Component, Injector, OnInit, output, ChangeDetectorRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
@@ -36,7 +36,7 @@ export class CreateRoleDialogComponent extends AppComponentBase implements OnIni
     checkedPermissionsMap: { [key: string]: boolean } = {};
     defaultPermissionCheckedStatus = true;
 
-    onSave = output<EventEmitter<any>>();
+    readonly onSave = output();
 
     constructor(
         injector: Injector,
@@ -92,7 +92,7 @@ export class CreateRoleDialogComponent extends AppComponentBase implements OnIni
             () => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.bsModalRef.hide();
-                this.onSave.emit(null);
+                this.onSave.emit();
             },
             () => {
                 this.saving = false;

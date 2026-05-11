@@ -3,7 +3,6 @@ import { AbpSessionService } from 'abp-ng2-module';
 import { AppComponentBase } from '@shared/app-component-base';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AppAuthService } from '@shared/auth/app-auth.service';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AbpValidationSummaryComponent } from '../../shared/components/validation/abp-validation.summary.component';
 import { Router, RouterLink } from '@angular/router';
@@ -16,7 +15,6 @@ import { MockInmateSessionService } from '@shared/services/mock-inmate-session.s
     animations: [accountModuleAnimation()],
     standalone: true,
     imports: [
-        CommonModule,
         FormsModule,
         AbpValidationSummaryComponent,
         RouterLink,

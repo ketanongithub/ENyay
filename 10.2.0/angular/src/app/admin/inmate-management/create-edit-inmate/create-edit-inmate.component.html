@@ -19,7 +19,9 @@
                             <ng-template pTemplate="header">
                                 <i class="fas fa-id-badge"></i>
                                 <span class="tab-header-label">Inmate Details</span>
-                                <span *ngIf="isTabInvalid(tabs[0])" class="tab-error-dot" aria-label="errors"></span>
+                                @if (isTabInvalid(tabs[0])) {
+                                    <span class="tab-error-dot" aria-label="errors"></span>
+                                }
                             </ng-template>
                             <div class="section-card">
                                 <div class="section-title">
@@ -51,11 +53,11 @@
                                                     placeholder="Enter full name"
                                                     formControlName="fullName"
                                                     [class.is-invalid]="form.controls['fullName'].invalid && form.controls['fullName'].touched" />
-                                                <small
-                                                    *ngIf="form.controls['fullName'].invalid && form.controls['fullName'].touched"
-                                                    class="text-danger">
-                                                    Full Name is required.
-                                                </small>
+                                                @if (form.controls['fullName'].invalid && form.controls['fullName'].touched) {
+                                                    <small class="text-danger">
+                                                        Full Name is required.
+                                                    </small>
+                                                }
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Alias Name</label>
@@ -180,11 +182,11 @@
                                             placeholder="Confirm password"
                                             formControlName="confirmPassword"
                                             [class.is-invalid]="form.errors?.['passwordsMismatch'] && form.controls['confirmPassword'].touched" />
-                                        <small
-                                            *ngIf="form.errors?.['passwordsMismatch'] && form.controls['confirmPassword'].touched"
-                                            class="text-danger">
-                                            Passwords do not match.
-                                        </small>
+                                        @if (form.errors?.['passwordsMismatch'] && form.controls['confirmPassword'].touched) {
+                                            <small class="text-danger">
+                                                Passwords do not match.
+                                            </small>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +199,9 @@
                             <ng-template pTemplate="header">
                                 <i class="fas fa-phone"></i>
                                 <span class="tab-header-label">Audio Call</span>
-                                <span *ngIf="isTabInvalid(tabs[1])" class="tab-error-dot" aria-label="errors"></span>
+                                @if (isTabInvalid(tabs[1])) {
+                                    <span class="tab-error-dot" aria-label="errors"></span>
+                                }
                             </ng-template>
                             <div class="section-card" formGroupName="audioContact">
                                 <div class="section-title">
@@ -229,7 +233,9 @@
                                         <label>Relation</label>
                                         <select class="form-control" formControlName="relation">
                                             <option value="">Select relation</option>
-                                            <option *ngFor="let r of relations" [value]="r">{{ r }}</option>
+                                            @for (r of relations; track r) {
+                                                <option [value]="r">{{ r }}</option>
+                                            }
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -244,11 +250,11 @@
                                                 placeholder="Enter mobile number"
                                                 formControlName="contactNumber1" />
                                         </div>
-                                        <small
-                                            *ngIf="audioContactGroup.controls['contactNumber1'].invalid && audioContactGroup.controls['contactNumber1'].touched"
-                                            class="text-danger">
-                                            Enter a 10-digit mobile number.
-                                        </small>
+                                        @if (audioContactGroup.controls['contactNumber1'].invalid && audioContactGroup.controls['contactNumber1'].touched) {
+                                            <small class="text-danger">
+                                                Enter a 10-digit mobile number.
+                                            </small>
+                                        }
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Contact Number 2 (Optional)</label>
@@ -288,11 +294,11 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <small
-                                            *ngIf="audioContactGroup.controls['simOwnerValidated'].value"
-                                            class="text-success">
-                                            <i class="fas fa-check-circle"></i> SIM owner validated
-                                        </small>
+                                        @if (audioContactGroup.controls['simOwnerValidated'].value) {
+                                            <small class="text-success">
+                                                <i class="fas fa-check-circle"></i> SIM owner validated
+                                            </small>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +311,9 @@
                             <ng-template pTemplate="header">
                                 <i class="fas fa-video"></i>
                                 <span class="tab-header-label">Video Call</span>
-                                <span *ngIf="isTabInvalid(tabs[2])" class="tab-error-dot" aria-label="errors"></span>
+                                @if (isTabInvalid(tabs[2])) {
+                                    <span class="tab-error-dot" aria-label="errors"></span>
+                                }
                             </ng-template>
                             <div class="section-card" formGroupName="videoContact">
                                 <div class="section-title">
@@ -337,7 +345,9 @@
                                         <label>Relation</label>
                                         <select class="form-control" formControlName="relation">
                                             <option value="">Select relation</option>
-                                            <option *ngFor="let r of relations" [value]="r">{{ r }}</option>
+                                            @for (r of relations; track r) {
+                                                <option [value]="r">{{ r }}</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -348,8 +358,8 @@
                                     <label>eNyay Path App IDs (For Video Call)</label>
                                     <p class="text-muted small mb-2">Add up to 3 App IDs</p>
 
+                                    @for (appIdGroup of appIdsArray.controls; track appIdGroup; let i = $index) {
                                     <div
-                                        *ngFor="let appIdGroup of appIdsArray.controls; let i = index"
                                         class="app-id-row"
                                         [formGroupName]="i">
                                         <span class="label">App ID {{ i + 1 }}</span>
@@ -371,6 +381,7 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
+                                    }
                                 </div>
                             </div>
                         </p-tabPanel>
@@ -405,10 +416,11 @@
                                                 {{ biometricGroup.value.thumbCaptured ? 'Re-capture Thumb' : 'Capture Thumb' }}
                                             </button>
                                             <span class="capture-status" [class.captured]="biometricGroup.value.thumbCaptured">
-                                                <ng-container *ngIf="biometricGroup.value.thumbCaptured; else thumbPending">
+                                                @if (biometricGroup.value.thumbCaptured) {
                                                     <i class="fas fa-check-circle"></i> Thumb captured
-                                                </ng-container>
-                                                <ng-template #thumbPending>Not captured yet</ng-template>
+                                                } @else {
+                                                    Not captured yet
+                                                }
                                             </span>
                                         </div>
                                     </div>
@@ -424,10 +436,11 @@
                                                 {{ biometricGroup.value.faceCaptured ? 'Re-capture Face' : 'Capture Face' }}
                                             </button>
                                             <span class="capture-status" [class.captured]="biometricGroup.value.faceCaptured">
-                                                <ng-container *ngIf="biometricGroup.value.faceCaptured; else facePending">
+                                                @if (biometricGroup.value.faceCaptured) {
                                                     <i class="fas fa-check-circle"></i> Face captured
-                                                </ng-container>
-                                                <ng-template #facePending>Not captured yet</ng-template>
+                                                } @else {
+                                                    Not captured yet
+                                                }
                                             </span>
                                         </div>
                                     </div>
@@ -468,13 +481,14 @@
                                     <div class="col-md-4 mb-3">
                                         <label>Quick Recharge</label>
                                         <div class="preset-grid">
-                                            <button
-                                                type="button"
-                                                *ngFor="let amt of rechargePresets"
-                                                [class.active]="rechargeAmount === amt"
-                                                (click)="applyPreset(amt)">
-                                                {{ amt }}
-                                            </button>
+                                            @for (amt of rechargePresets; track amt) {
+                                                <button
+                                                    type="button"
+                                                    [class.active]="rechargeAmount === amt"
+                                                    (click)="applyPreset(amt)">
+                                                    {{ amt }}
+                                                </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -605,7 +619,9 @@
                                             [(ngModel)]="deactivateReason"
                                             [ngModelOptions]="{ standalone: true }">
                                             <option value="">Select reason</option>
-                                            <option *ngFor="let r of deactivateReasons" [value]="r">{{ r }}</option>
+                                            @for (r of deactivateReasons; track r) {
+                                                <option [value]="r">{{ r }}</option>
+                                            }
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -669,13 +685,14 @@
                             <button type="button" class="btn btn-link" (click)="cancel()">
                                 Cancel
                             </button>
-                            <button
-                                *ngIf="!isLastTab"
-                                type="button"
-                                class="btn btn-primary"
-                                (click)="nextTab()">
-                                Next <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
+                            @if (!isLastTab) {
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    (click)="nextTab()">
+                                    Next <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            }
                             <button type="submit" class="btn btn-success">
                                 <i class="fas fa-save mr-1"></i>
                                 {{ inmateId ? 'Update Inmate' : 'Save All Details' }}

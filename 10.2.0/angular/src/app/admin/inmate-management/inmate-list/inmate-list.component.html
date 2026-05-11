@@ -62,8 +62,11 @@
                                     </span>
                                     <span class="meta">
                                         <span class="name">{{ record.fullName }}</span>
-                                        <span class="alias" *ngIf="record.aliasName">a.k.a. {{ record.aliasName }}</span>
-                                        <span class="alias" *ngIf="!record.aliasName">S/D of {{ record.fatherName }}</span>
+                                        @if (record.aliasName) {
+                                            <span class="alias">a.k.a. {{ record.aliasName }}</span>
+                                        } @else {
+                                            <span class="alias">S/D of {{ record.fatherName }}</span>
+                                        }
                                     </span>
                                 </div>
                             </td>

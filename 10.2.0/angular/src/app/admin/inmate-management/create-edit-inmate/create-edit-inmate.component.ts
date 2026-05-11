@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import {
     AbstractControl,
     FormArray,
@@ -56,7 +56,7 @@ function passwordsMatchValidator(group: AbstractControl): ValidationErrors | nul
     animations: [appModuleAnimation()],
     standalone: true,
     imports: [
-        CommonModule,
+        DecimalPipe,
         FormsModule,
         ReactiveFormsModule,
         RouterLink,

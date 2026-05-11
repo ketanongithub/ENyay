@@ -1,8 +1,8 @@
-<pagination-template #p="paginationApi" [id]="id" [maxSize]="maxSize" (pageChange)="pageChange.emit($event)">
+<pagination-template #p="paginationApi" [id]="id()" [maxSize]="maxSize()" (pageChange)="pageChange.emit($event)">
     <nav>
-        @if (!(autoHide && p.pages.length <= 1)) {
+        @if (!(autoHide() && p.pages.length <= 1)) {
             <ul class="pagination m-0">
-                @if (directionLinks) {
+                @if (directionLinks()) {
                     <li class="page-item" [class.disabled]="p.isFirstPage()">
                         @if (!p.isFirstPage()) {
                             <a class="page-link" href="javascript:;" (click)="p.previous()">
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                 }
-                @if (directionLinks) {
+                @if (directionLinks()) {
                     <li class="page-item" [class.disabled]="p.isLastPage()">
                         @if (!p.isLastPage()) {
                             <a class="page-link" href="javascript:;" (click)="p.next()">

@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, Injector, OnInit, ChangeDetectorRef, output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -31,7 +31,7 @@ import { LocalizePipe } from '@shared/pipes/localize.pipe';
     ],
 })
 export class EditRoleDialogComponent extends AppComponentBase implements OnInit {
-    @Output() onSave = new EventEmitter<any>();
+    readonly onSave = output();
 
     saving = false;
     id: number;

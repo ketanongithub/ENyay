@@ -1,46 +1,39 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 export interface BreadcrumbItem {
     label: string;
-    /** Router commands array. Optional — last item is rendered as plain text. */
     link?: any[] | string;
     icon?: string;
 }
 
-/**
- * Lightweight breadcrumb trail used at the top of admin pages.
- *
- * Usage:
- *   <app-breadcrumbs [trail]="[
- *     { label: 'Admin', link: ['/app/admin/dashboard'], icon: 'fas fa-home' },
- *     { label: 'Inmate Management', link: ['/app/admin/inmate-management'] },
- *     { label: 'Add Inmate' }
- *   ]"></app-breadcrumbs>
- */
 @Component({
     selector: 'app-breadcrumbs',
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [RouterLink],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <nav class="app-breadcrumbs" aria-label="Breadcrumb">
             <ol>
-                <li *ngFor="let item of trail; let last = last" [class.active]="last">
-                    <ng-container *ngIf="item.link && !last; else plain">
-                        <a [routerLink]="item.link">
-                            <i *ngIf="item.icon" [class]="item.icon"></i>
-                            {{ item.label }}
-                        </a>
-                    </ng-container>
-                    <ng-template #plain>
-                        <span>
-                            <i *ngIf="item.icon" [class]="item.icon"></i>
-                            {{ item.label }}
-                        </span>
-                    </ng-template>
-                </li>
+                @for (item of trail(); track item.label; let last = $last) {
+                    <li [class.active]="last">
+                        @if (item.link && !last) {
+                            <a [routerLink]="item.link">
+                                @if (item.icon) {
+                                    <i [class]="item.icon"></i>
+                                }
+                                {{ item.label }}
+                            </a>
+                        } @else {
+                            <span>
+                                @if (item.icon) {
+                                    <i [class]="item.icon"></i>
+                                }
+                                {{ item.label }}
+                            </span>
+                        }
+                    </li>
+                }
             </ol>
         </nav>
     `,
@@ -91,5 +84,5 @@ export interface BreadcrumbItem {
     ],
 })
 export class BreadcrumbsComponent {
-    @Input() trail: BreadcrumbItem[] = [];
+    readonly trail = input<BreadcrumbItem[]>([]);
 }

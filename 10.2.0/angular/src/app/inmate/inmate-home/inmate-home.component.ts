@@ -1,5 +1,4 @@
 import { Component, Injector } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
@@ -8,7 +7,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
     templateUrl: './inmate-home.component.html',
     animations: [appModuleAnimation()],
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [FormsModule],
 })
 export class InmateHomeComponent extends AppComponentBase {
     prisonId = '';

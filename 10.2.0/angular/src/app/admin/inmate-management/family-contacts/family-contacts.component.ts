@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -14,7 +13,7 @@ import { BreadcrumbsComponent } from '@shared/components/breadcrumbs/breadcrumbs
 @Component({
     standalone: true,
     selector: 'app-family-contacts',
-    imports: [CommonModule, RouterLink, PageHeaderComponent, BreadcrumbsComponent],
+    imports: [RouterLink, PageHeaderComponent, BreadcrumbsComponent],
     animations: [appModuleAnimation()],
     template: `
         <div [@routerTransition]>

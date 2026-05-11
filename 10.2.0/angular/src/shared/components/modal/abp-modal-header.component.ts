@@ -1,4 +1,4 @@
-import { Component, input, output, EventEmitter, ChangeDetectionStrategy, Injector } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
@@ -8,9 +8,9 @@ import { AppComponentBase } from '@shared/app-component-base';
     standalone: true,
 })
 export class AbpModalHeaderComponent extends AppComponentBase {
-    title = input<string>();
+    readonly title = input<string>();
 
-    onCloseClick = output<EventEmitter<number>>();
+    readonly onCloseClick = output();
 
     constructor(injector: Injector) {
         super(injector);

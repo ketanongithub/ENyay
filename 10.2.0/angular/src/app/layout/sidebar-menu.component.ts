@@ -43,29 +43,15 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
     getMenuItems(): MenuItem[] {
         return [
             new MenuItem(this.l('Dashboard'), '/app/admin/dashboard', 'fas fa-tachometer-alt'),
-            new MenuItem(
-                this.l('Inmate Management'),
-                '',
-                'fas fa-user-friends',
-                null,
-                [
-                    new MenuItem(
-                        this.l('Add / Update Inmate'),
-                        '/app/admin/inmate-management/new',
-                        'fas fa-plus'
-                    ),
-                    new MenuItem(
-                        this.l('Inmate List'),
-                        '/app/admin/inmate-management',
-                        'fas fa-plus'
-                    )
-                    // new MenuItem(
-                    //     this.l('Family Contacts'),
-                    //     '/app/admin/inmate-management/family-contacts',
-                    //     'fas fa-plus'
-                    // ),
-                ]
-            ),
+            new MenuItem(this.l('Inmate Management'), '', 'fas fa-user-friends', null, [
+                new MenuItem(this.l('Add / Update Inmate'), '/app/admin/inmate-management/new', 'fas fa-plus'),
+                new MenuItem(this.l('Inmate List'), '/app/admin/inmate-management', 'fas fa-plus'),
+                // new MenuItem(
+                //     this.l('Family Contacts'),
+                //     '/app/admin/inmate-management/family-contacts',
+                //     'fas fa-plus'
+                // ),
+            ]),
             new MenuItem(this.l('Roles'), '/app/roles', 'fas fa-theater-masks', 'Pages.Roles'),
             new MenuItem(this.l('Tenants'), '/app/tenants', 'fas fa-building', 'Pages.Tenants'),
             new MenuItem(this.l('Users'), '/app/users', 'fas fa-users', 'Pages.Users'),

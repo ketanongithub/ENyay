@@ -1,5 +1,4 @@
 import { Component, Injector } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AppComponentBase } from '@shared/app-component-base';
 import { MockInmateSessionService } from '@shared/services/mock-inmate-session.service';
@@ -7,7 +6,7 @@ import { MockInmateSessionService } from '@shared/services/mock-inmate-session.s
 @Component({
     templateUrl: './inmate-portal.component.html',
     standalone: true,
-    imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+    imports: [RouterOutlet, RouterLink, RouterLinkActive],
 })
 export class InmatePortalComponent extends AppComponentBase {
     constructor(

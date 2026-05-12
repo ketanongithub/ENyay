@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { TableModule } from 'primeng/table';
@@ -20,7 +20,7 @@ interface RecentRequest {
     templateUrl: './admin-dashboard.component.html',
     animations: [appModuleAnimation()],
     standalone: true,
-    imports: [CommonModule, TableModule, PrimeTemplate, PageHeaderComponent, StatusBadgeComponent, BreadcrumbsComponent],
+    imports: [DecimalPipe, TableModule, PrimeTemplate, PageHeaderComponent, StatusBadgeComponent, BreadcrumbsComponent],
 })
 export class AdminDashboardComponent extends AppComponentBase {
     totalInmates = 156;

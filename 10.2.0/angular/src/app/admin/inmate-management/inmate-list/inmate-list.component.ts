@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Injector, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Table, TableModule } from 'primeng/table';
@@ -18,7 +18,7 @@ import { InmateRecord, MockInmateService } from '@shared/services/mock-inmate.se
     animations: [appModuleAnimation()],
     standalone: true,
     imports: [
-        CommonModule,
+        DecimalPipe,
         FormsModule,
         RouterLink,
         TableModule,
@@ -29,7 +29,7 @@ import { InmateRecord, MockInmateService } from '@shared/services/mock-inmate.se
         AutofocusDirective,
     ],
 })
-export class InmateListComponent extends PagedListingComponentBase<InmateRecord> {
+export class InmateListComponent extends PagedListingComponentBase<InmateRecord> implements OnInit {
     @ViewChild('dataTable', { static: true }) dataTable: Table;
 
     keyword = '';

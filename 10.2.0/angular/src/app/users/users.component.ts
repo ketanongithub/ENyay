@@ -12,14 +12,13 @@ import { LazyLoadEvent, PrimeTemplate } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { Paginator, PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 import { LocalizePipe } from '@shared/pipes/localize.pipe';
 
 @Component({
     templateUrl: './users.component.html',
     animations: [appModuleAnimation()],
     standalone: true,
-    imports: [FormsModule, TableModule, PrimeTemplate, NgIf, PaginatorModule, LocalizePipe],
+    imports: [FormsModule, TableModule, PrimeTemplate, PaginatorModule, LocalizePipe],
 })
 export class UsersComponent extends PagedListingComponentBase<UserDto> {
     @ViewChild('dataTable', { static: true }) dataTable: Table;

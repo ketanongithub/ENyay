@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, Renderer2 } from '@angular/core';
+import { Component, Injector, OnInit, Renderer2, inject } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
@@ -13,13 +13,12 @@ import { FooterComponent } from './layout/footer.component';
     imports: [HeaderComponent, SidebarComponent, RouterOutlet, FooterComponent],
 })
 export class AppComponent extends AppComponentBase implements OnInit {
-    sidebarExpanded: boolean;
+    readonly layoutStore = inject(LayoutStoreService);
+    readonly sidebarExpanded = this.layoutStore.sidebarExpanded;
 
-    constructor(
-        injector: Injector,
-        private renderer: Renderer2,
-        private _layoutStore: LayoutStoreService
-    ) {
+    private readonly renderer = inject(Renderer2);
+
+    constructor(injector: Injector) {
         super(injector);
     }
 
@@ -31,7 +30,6 @@ export class AppComponent extends AppComponentBase implements OnInit {
         abp.event.on('abp.notifications.received', (userNotification) => {
             abp.notifications.showUiNotifyForUserNotification(userNotification);
 
-            // Desktop notification
             Push.create('AbpZeroTemplate', {
                 body: userNotification.notification.data.message,
                 icon: abp.appPath + 'assets/app-logo-small.png',
@@ -42,13 +40,9 @@ export class AppComponent extends AppComponentBase implements OnInit {
                 },
             });
         });
-
-        this._layoutStore.sidebarExpanded.subscribe((value) => {
-            this.sidebarExpanded = value;
-        });
     }
 
     toggleSidebar(): void {
-        this._layoutStore.setSidebarExpanded(!this.sidebarExpanded);
+        this.layoutStore.setSidebarExpanded(!this.sidebarExpanded());
     }
 }

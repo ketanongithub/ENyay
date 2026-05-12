@@ -1,5 +1,4 @@
 import { Component, Injector } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { PrimeTemplate } from 'primeng/api';
 import { AppComponentBase } from '@shared/app-component-base';
@@ -17,7 +16,7 @@ interface InmateRequest {
     templateUrl: './my-requests.component.html',
     animations: [appModuleAnimation()],
     standalone: true,
-    imports: [CommonModule, TableModule, PrimeTemplate, StatusBadgeComponent],
+    imports: [TableModule, PrimeTemplate, StatusBadgeComponent],
 })
 export class MyRequestsComponent extends AppComponentBase {
     requests: InmateRequest[] = [

@@ -1,4 +1,4 @@
-import { Component, Input, Injector, Renderer2, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Injector, Renderer2, ElementRef, OnInit, input, effect } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AbpValidationError } from './abp-validation.api';
@@ -40,21 +40,24 @@ export class AbpValidationSummaryComponent extends AppComponentBase implements O
     ];
     validationErrors = <AbpValidationError[]>this.defaultValidationErrors;
 
+    readonly customValidationErrors = input<AbpValidationError[]>([]);
+
     constructor(
         injector: Injector,
         public _renderer: Renderer2
     ) {
         super(injector);
-    }
 
-    @Input() set customValidationErrors(val: AbpValidationError[]) {
-        if (val && val.length > 0) {
-            const defaults = this.defaultValidationErrors.filter(
-                (defaultValidationError) =>
-                    !val.find((customValidationError) => customValidationError.name === defaultValidationError.name)
-            );
-            this.validationErrors = <AbpValidationError[]>[...defaults, ...val];
-        }
+        effect(() => {
+            const val = this.customValidationErrors();
+            if (val && val.length > 0) {
+                const defaults = this.defaultValidationErrors.filter(
+                    (defaultValidationError) =>
+                        !val.find((customValidationError) => customValidationError.name === defaultValidationError.name)
+                );
+                this.validationErrors = <AbpValidationError[]>[...defaults, ...val];
+            }
+        });
     }
 
     ngOnInit() {

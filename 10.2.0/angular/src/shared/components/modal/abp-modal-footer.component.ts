@@ -1,4 +1,4 @@
-import { Component, input, output, EventEmitter, ChangeDetectionStrategy, Injector } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
@@ -8,12 +8,12 @@ import { AppComponentBase } from '@shared/app-component-base';
     standalone: true,
 })
 export class AbpModalFooterComponent extends AppComponentBase {
-    cancelLabel = input(this.l('Cancel'));
-    cancelDisabled = input<boolean>();
-    saveLabel = input(this.l('Save'));
-    saveDisabled = input<boolean>();
+    readonly cancelLabel = input(this.l('Cancel'));
+    readonly cancelDisabled = input<boolean>();
+    readonly saveLabel = input(this.l('Save'));
+    readonly saveDisabled = input<boolean>();
 
-    onCancelClick = output<EventEmitter<number>>();
+    readonly onCancelClick = output();
 
     constructor(injector: Injector) {
         super(injector);

@@ -20,12 +20,7 @@ import { PageHeaderComponent } from '@shared/components/page-header/page-header.
 import { StatusBadgeComponent } from '@shared/components/status-badge/status-badge.component';
 import { BreadcrumbsComponent, BreadcrumbItem } from '@shared/components/breadcrumbs/breadcrumbs.component';
 import { StatusClassPipe } from '@shared/pipes/status-class.pipe';
-import {
-    ApprovalState,
-    InmateRecord,
-    MockInmateService,
-    emptyInmate,
-} from '@shared/services/mock-inmate.service';
+import { ApprovalState, InmateRecord, MockInmateService, emptyInmate } from '@shared/services/mock-inmate.service';
 
 interface TabDescriptor {
     index: number;
@@ -117,121 +112,6 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
         super(injector);
     }
 
-    ngOnInit(): void {
-        this.form = this.buildForm();
-
-        const idParam = this.route.snapshot.paramMap.get('id');
-        if (idParam) {
-            const id = parseInt(idParam, 10);
-            const existing = this.inmateStore.get(id);
-            if (!existing) {
-                abp.notify.error(`Inmate ${id} not found.`);
-                this.router.navigate(['/app/admin/inmate-management']);
-                return;
-            }
-            // Deep clone so cancelling does not mutate the store.
-            this.patchFromRecord(JSON.parse(JSON.stringify(existing)));
-            this.inmateId = id;
-        }
-    }
-
-    private buildForm(): FormGroup {
-        const seed = emptyInmate();
-        this.walletBalance = seed.walletBalance;
-        return this.fb.group(
-            {
-                fullName: [seed.fullName, [Validators.required, Validators.maxLength(80)]],
-                aliasName: [seed.aliasName, Validators.maxLength(80)],
-                fatherName: [seed.fatherName, [Validators.required, Validators.maxLength(80)]],
-                gender: [seed.gender, Validators.required],
-                jailNo: [seed.jailNo, Validators.required],
-                prisonId: [seed.prisonId, Validators.required],
-                aadharNumber: [seed.aadharNumber],
-                passportNumber: [seed.passportNumber],
-                drivingLicenseNumber: [seed.drivingLicenseNumber],
-                loginPassword: [seed.loginPassword, Validators.minLength(8)],
-                confirmPassword: [''],
-                audioContact: this.fb.group({
-                    fullName: [seed.audioContact.fullName],
-                    fatherName: [seed.audioContact.fatherName],
-                    relation: [seed.audioContact.relation],
-                    contactNumber1: [
-                        seed.audioContact.contactNumber1,
-                        Validators.pattern(/^\d{10}$/),
-                    ],
-                    contactNumber2: [seed.audioContact.contactNumber2, Validators.pattern(/^\d{10}$/)],
-                    simOwnerName: [seed.audioContact.simOwnerName],
-                    simOwnerValidated: [seed.audioContact.simOwnerValidated],
-                }),
-                videoContact: this.fb.group({
-                    fullName: [seed.videoContact.fullName],
-                    fatherName: [seed.videoContact.fatherName],
-                    relation: [seed.videoContact.relation],
-                    appIds: this.fb.array(seed.videoContact.appIds.map((entry) => this.makeAppIdGroup(entry))),
-                }),
-                biometric: this.fb.group({
-                    thumbCaptured: [seed.biometric.thumbCaptured],
-                    faceCaptured: [seed.biometric.faceCaptured],
-                }),
-                approval: this.fb.group({
-                    level1Status: [seed.approval.level1Status],
-                    level1Remarks: [seed.approval.level1Remarks],
-                    level2Status: [seed.approval.level2Status],
-                    level2Remarks: [seed.approval.level2Remarks],
-                    level3Status: [seed.approval.level3Status],
-                    level3Remarks: [seed.approval.level3Remarks],
-                }),
-            },
-            { validators: passwordsMatchValidator }
-        );
-    }
-
-    private makeAppIdGroup(entry: { appId: string; registeredName: string }): FormGroup {
-        return this.fb.group({
-            appId: [entry.appId],
-            registeredName: [entry.registeredName],
-        });
-    }
-
-    private patchFromRecord(record: InmateRecord): void {
-        this.walletBalance = record.walletBalance;
-        // Resize the appIds FormArray to the record's length before patching.
-        const appIds = this.appIdsArray;
-        while (appIds.length < record.videoContact.appIds.length) {
-            appIds.push(this.makeAppIdGroup({ appId: '', registeredName: '' }));
-        }
-        while (appIds.length > record.videoContact.appIds.length) {
-            appIds.removeAt(appIds.length - 1);
-        }
-        this.form.patchValue(
-            {
-                fullName: record.fullName,
-                aliasName: record.aliasName,
-                fatherName: record.fatherName,
-                gender: record.gender,
-                jailNo: record.jailNo,
-                prisonId: record.prisonId,
-                aadharNumber: record.aadharNumber,
-                passportNumber: record.passportNumber,
-                drivingLicenseNumber: record.drivingLicenseNumber,
-                loginPassword: record.loginPassword,
-                confirmPassword: record.loginPassword,
-                audioContact: record.audioContact,
-                videoContact: {
-                    fullName: record.videoContact.fullName,
-                    fatherName: record.videoContact.fatherName,
-                    relation: record.videoContact.relation,
-                    appIds: record.videoContact.appIds,
-                },
-                biometric: record.biometric,
-                approval: record.approval,
-            },
-            { emitEvent: false }
-        );
-    }
-
-    /** ------------------------ Form helpers ------------------------ */
-
     get appIdsArray(): FormArray<FormGroup> {
         return this.form.get('videoContact.appIds') as FormArray<FormGroup>;
     }
@@ -247,8 +127,6 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
     get biometricGroup(): FormGroup {
         return this.form.get('biometric') as FormGroup;
     }
-
-    /** ------------------------ View getters ------------------------ */
 
     get pageTitle(): string {
         const name = this.form?.get('fullName')?.value || this.form?.get('prisonId')?.value;
@@ -280,7 +158,11 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
     }
 
     get finalStatus(): ApprovalState {
-        const a = this.approvalGroup.value as { level1Status: ApprovalState; level2Status: ApprovalState; level3Status: ApprovalState };
+        const a = this.approvalGroup.value as {
+            level1Status: ApprovalState;
+            level2Status: ApprovalState;
+            level3Status: ApprovalState;
+        };
         if (a.level1Status === 'Rejected' || a.level2Status === 'Rejected' || a.level3Status === 'Rejected') {
             return 'Rejected';
         }
@@ -301,6 +183,23 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
         }
     }
 
+    ngOnInit(): void {
+        this.form = this.buildForm();
+
+        const idParam = this.route.snapshot.paramMap.get('id');
+        if (idParam) {
+            const id = parseInt(idParam, 10);
+            const existing = this.inmateStore.get(id);
+            if (!existing) {
+                abp.notify.error(`Inmate ${id} not found.`);
+                this.router.navigate(['/app/admin/inmate-management']);
+                return;
+            }
+            this.patchFromRecord(JSON.parse(JSON.stringify(existing)));
+            this.inmateId = id;
+        }
+    }
+
     isTabInvalid(tab: TabDescriptor): boolean {
         if (tab.group) {
             const grp = this.form.get(tab.group);
@@ -314,8 +213,6 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
         }
         return false;
     }
-
-    /** ------------------------ Wizard nav ------------------------ */
 
     nextTab(): void {
         if (!this.isLastTab) {
@@ -334,8 +231,6 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
             this.activeTabIndex = index;
         }
     }
-
-    /** ------------------------ Tab actions ------------------------ */
 
     setApproval(level: 1 | 2 | 3, status: ApprovalState): void {
         this.approvalGroup.patchValue({ [`level${level}Status`]: status });
@@ -424,8 +319,6 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
         row?.patchValue({ appId: '', registeredName: '' });
     }
 
-    /** ------------------------ Save / cancel ------------------------ */
-
     saveAll(): void {
         if (this.form.invalid) {
             this.form.markAllAsTouched();
@@ -460,7 +353,7 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
             biometric: v.biometric,
             walletBalance: this.walletBalance,
             approval: v.approval,
-            status: 'Pending', // recomputed inside MockInmateService.save
+            status: 'Pending',
         };
 
         const saved = this.inmateStore.save(record);
@@ -470,5 +363,96 @@ export class CreateEditInmateComponent extends AppComponentBase implements OnIni
 
     cancel(): void {
         this.router.navigate(['/app/admin/inmate-management']);
+    }
+
+    private buildForm(): FormGroup {
+        const seed = emptyInmate();
+        this.walletBalance = seed.walletBalance;
+        return this.fb.group(
+            {
+                fullName: [seed.fullName, [Validators.required, Validators.maxLength(80)]],
+                aliasName: [seed.aliasName, Validators.maxLength(80)],
+                fatherName: [seed.fatherName, [Validators.required, Validators.maxLength(80)]],
+                gender: [seed.gender, Validators.required],
+                jailNo: [seed.jailNo, Validators.required],
+                prisonId: [seed.prisonId, Validators.required],
+                aadharNumber: [seed.aadharNumber],
+                passportNumber: [seed.passportNumber],
+                drivingLicenseNumber: [seed.drivingLicenseNumber],
+                loginPassword: [seed.loginPassword, Validators.minLength(8)],
+                confirmPassword: [''],
+                audioContact: this.fb.group({
+                    fullName: [seed.audioContact.fullName],
+                    fatherName: [seed.audioContact.fatherName],
+                    relation: [seed.audioContact.relation],
+                    contactNumber1: [seed.audioContact.contactNumber1, Validators.pattern(/^\d{10}$/)],
+                    contactNumber2: [seed.audioContact.contactNumber2, Validators.pattern(/^\d{10}$/)],
+                    simOwnerName: [seed.audioContact.simOwnerName],
+                    simOwnerValidated: [seed.audioContact.simOwnerValidated],
+                }),
+                videoContact: this.fb.group({
+                    fullName: [seed.videoContact.fullName],
+                    fatherName: [seed.videoContact.fatherName],
+                    relation: [seed.videoContact.relation],
+                    appIds: this.fb.array(seed.videoContact.appIds.map((entry) => this.makeAppIdGroup(entry))),
+                }),
+                biometric: this.fb.group({
+                    thumbCaptured: [seed.biometric.thumbCaptured],
+                    faceCaptured: [seed.biometric.faceCaptured],
+                }),
+                approval: this.fb.group({
+                    level1Status: [seed.approval.level1Status],
+                    level1Remarks: [seed.approval.level1Remarks],
+                    level2Status: [seed.approval.level2Status],
+                    level2Remarks: [seed.approval.level2Remarks],
+                    level3Status: [seed.approval.level3Status],
+                    level3Remarks: [seed.approval.level3Remarks],
+                }),
+            },
+            { validators: passwordsMatchValidator }
+        );
+    }
+
+    private makeAppIdGroup(entry: { appId: string; registeredName: string }): FormGroup {
+        return this.fb.group({
+            appId: [entry.appId],
+            registeredName: [entry.registeredName],
+        });
+    }
+
+    private patchFromRecord(record: InmateRecord): void {
+        this.walletBalance = record.walletBalance;
+        const appIds = this.appIdsArray;
+        while (appIds.length < record.videoContact.appIds.length) {
+            appIds.push(this.makeAppIdGroup({ appId: '', registeredName: '' }));
+        }
+        while (appIds.length > record.videoContact.appIds.length) {
+            appIds.removeAt(appIds.length - 1);
+        }
+        this.form.patchValue(
+            {
+                fullName: record.fullName,
+                aliasName: record.aliasName,
+                fatherName: record.fatherName,
+                gender: record.gender,
+                jailNo: record.jailNo,
+                prisonId: record.prisonId,
+                aadharNumber: record.aadharNumber,
+                passportNumber: record.passportNumber,
+                drivingLicenseNumber: record.drivingLicenseNumber,
+                loginPassword: record.loginPassword,
+                confirmPassword: record.loginPassword,
+                audioContact: record.audioContact,
+                videoContact: {
+                    fullName: record.videoContact.fullName,
+                    fatherName: record.videoContact.fatherName,
+                    relation: record.videoContact.relation,
+                    appIds: record.videoContact.appIds,
+                },
+                biometric: record.biometric,
+                approval: record.approval,
+            },
+            { emitEvent: false }
+        );
     }
 }

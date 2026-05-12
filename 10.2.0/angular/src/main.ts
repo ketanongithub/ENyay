@@ -13,7 +13,7 @@ import 'moment-timezone';
 import { provideClientHydration, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
-import { AbpHttpInterceptor } from 'abp-ng2-module';
+import { AbpHttpInterceptor, AbpModule } from 'abp-ng2-module';
 import { ErrorInterceptor } from '@shared/interceptors/error.interceptor';
 import { AppInitializer } from './app-initializer';
 import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
@@ -38,6 +38,7 @@ bootstrapApplication(RootComponent, {
     providers: [
         provideRouter(ROOT_ROUTES, withPreloading(PreloadAllModules)),
         importProvidersFrom(
+            AbpModule,
             SharedModule.forRoot(),
             ModalModule.forRoot(),
             BsDropdownModule.forRoot(),

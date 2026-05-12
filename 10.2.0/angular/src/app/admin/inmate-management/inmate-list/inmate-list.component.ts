@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Injector, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -29,7 +29,7 @@ import { InmateRecord, MockInmateService } from '@shared/services/mock-inmate.se
         AutofocusDirective,
     ],
 })
-export class InmateListComponent extends PagedListingComponentBase<InmateRecord> {
+export class InmateListComponent extends PagedListingComponentBase<InmateRecord> implements OnInit {
     @ViewChild('dataTable', { static: true }) dataTable: Table;
 
     keyword = '';

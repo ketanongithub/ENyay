@@ -21,14 +21,15 @@ import { BreadcrumbsComponent } from '@shared/components/breadcrumbs/breadcrumbs
                 [trail]="[
                     { label: 'Admin', link: ['/app/admin/dashboard'], icon: 'fas fa-home' },
                     { label: 'Inmate Management', link: ['/app/admin/inmate-management'] },
-                    { label: 'Family Contacts' }
+                    { label: 'Family Contacts' },
                 ]"></app-breadcrumbs>
 
             <app-page-header
                 title="Family Contacts"
                 subtitle="Authorised audio &amp; video call contacts across all inmates">
                 <a class="btn btn-default" [routerLink]="['/app/admin/inmate-management']">
-                    <i class="fas fa-arrow-left"></i> Back to inmates
+                    <i class="fas fa-arrow-left"></i>
+                    Back to inmates
                 </a>
             </app-page-header>
 
@@ -38,11 +39,14 @@ import { BreadcrumbsComponent } from '@shared/components/breadcrumbs/breadcrumbs
                         <i class="fas fa-address-book"></i>
                         <h4>Family Contacts directory — coming soon</h4>
                         <p>
-                            For now, audio and video call contacts are managed inside each inmate's
-                            profile. Open an inmate from the
+                            For now, audio and video call contacts are managed inside each inmate's profile. Open an
+                            inmate from the
                             <a [routerLink]="['/app/admin/inmate-management']">Inmate List</a>
-                            and switch to the <strong>Audio Call</strong> or
-                            <strong>Video Call</strong> tab to maintain their family contact details.
+                            and switch to the
+                            <strong>Audio Call</strong>
+                            or
+                            <strong>Video Call</strong>
+                            tab to maintain their family contact details.
                         </p>
                     </div>
                 </div>

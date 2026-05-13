@@ -2,21 +2,25 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './layout/main-layout/main-layout';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found';
+import { AuthGuard } from './core/guards/auth.guard';
+import { NoAuthGuard } from './core/guards/no-auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    canActivate: [NoAuthGuard],
+    loadChildren: () =>
+      import('./features/login/login.module').then((m) => m.LoginModule),
+  },
+  {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
-      },
-      {
-        path: 'home',
-        loadChildren: () =>
-          import('./features/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'dashboard',
@@ -24,11 +28,6 @@ const routes: Routes = [
           import('./features/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
           ),
-      },
-      {
-        path: 'about',
-        loadChildren: () =>
-          import('./features/about/about.module').then((m) => m.AboutModule),
       },
       {
         path: 'inmate-management',

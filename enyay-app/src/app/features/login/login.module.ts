@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { HomeComponent } from './home';
+import { LoginComponent } from './login';
 
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-];
+const routes: Routes = [{ path: '', component: LoginComponent }];
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [LoginComponent],
   imports: [SharedModule, RouterModule.forChild(routes)],
 })
-export class HomeModule {}
+export class LoginModule {}

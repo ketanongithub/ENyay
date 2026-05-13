@@ -8,10 +8,34 @@ import { APP_CONSTANTS } from '../constants';
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
   isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+
+  login(username: string, password: string): boolean {
+    if (username === 'admin' && password === 'admin') {
+      const token: AuthToken = {
+        accessToken: 'static-token-enyay',
+        refreshToken: 'static-refresh-enyay',
+        expiresIn: 86400,
+      };
+      this.setToken(token);
+      const user: User = {
+        id: '1',
+        email: 'admin@enyay.com',
+        firstName: 'Admin',
+        lastName: 'User',
+        roles: ['admin'],
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      this.setCurrentUser(user);
+      return true;
+    }
+    return false;
+  }
 
   getToken(): string | null {
     return localStorage.getItem(APP_CONSTANTS.STORAGE_KEYS.AUTH_TOKEN);
@@ -40,7 +64,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!localStorage.getItem(APP_CONSTANTS.STORAGE_KEYS.AUTH_TOKEN);
   }
 
   logout(): Observable<boolean> {

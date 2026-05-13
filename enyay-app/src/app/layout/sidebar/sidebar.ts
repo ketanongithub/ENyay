@@ -28,7 +28,7 @@ export class SidebarComponent {
         { label: 'Inmate List', icon: 'list', route: '/inmate-management/list' },
       ],
     },
-    { label: 'About', icon: 'info', route: '/about' },
+
   ];
 
   toggleSubmenu(item: NavItem): void {

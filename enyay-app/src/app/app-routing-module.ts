@@ -30,6 +30,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./features/about/about.module').then((m) => m.AboutModule),
       },
+      {
+        path: 'inmate-management',
+        loadChildren: () =>
+          import('./features/inmate-management/inmate-management.module').then(
+            (m) => m.InmateManagementModule
+          ),
+      },
     ],
   },
   { path: '**', component: PageNotFoundComponent },

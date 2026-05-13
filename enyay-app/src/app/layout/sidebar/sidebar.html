@@ -61,4 +61,12 @@
       </li>
     </ul>
   </nav>
+
+  <!-- Logout -->
+  <div class="sidebar-footer">
+    <button class="nav-link logout-link" (click)="logout()">
+      <span class="material-icon">🚪</span>
+      <span class="nav-label" *ngIf="!isCollapsed">Logout</span>
+    </button>
+  </div>
 </aside>

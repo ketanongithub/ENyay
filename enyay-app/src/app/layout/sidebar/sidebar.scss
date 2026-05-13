@@ -206,6 +206,22 @@ $border-color: rgba(255, 255, 255, 0.06);
   min-width: 1rem;
 }
 
+// Sidebar footer (logout)
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid $border-color;
+  padding: 0.5rem 0;
+}
+
+.logout-link {
+  color: $text-muted;
+
+  &:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+}
+
 // Scrollbar styling
 .app-sidebar {
   &::-webkit-scrollbar {

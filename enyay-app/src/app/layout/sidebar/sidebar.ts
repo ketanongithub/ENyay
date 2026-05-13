@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 export interface NavItem {
   label: string;
@@ -28,12 +30,21 @@ export class SidebarComponent {
         { label: 'Inmate List', icon: 'list', route: '/inmate-management/list' },
       ],
     },
-
   ];
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   toggleSubmenu(item: NavItem): void {
     if (item.children) {
       item.isExpanded = !item.isExpanded;
     }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

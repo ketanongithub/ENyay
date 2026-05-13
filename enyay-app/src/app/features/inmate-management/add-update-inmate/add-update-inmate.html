@@ -1,0 +1,63 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Add / Update Inmate</h2>
+    <p class="page-description">Manage inmate records — add new or update existing entries.</p>
+  </div>
+
+  <div class="form-card">
+    <form class="inmate-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" class="form-control" placeholder="Enter first name">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" class="form-control" placeholder="Enter last name">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="inmateId">Inmate ID</label>
+          <input id="inmateId" type="text" class="form-control" placeholder="Enter inmate ID">
+        </div>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input id="dateOfBirth" type="date" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="facility">Facility</label>
+          <select id="facility" class="form-control">
+            <option value="">Select facility</option>
+            <option value="facility-a">Facility A</option>
+            <option value="facility-b">Facility B</option>
+            <option value="facility-c">Facility C</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" class="form-control">
+            <option value="">Select status</option>
+            <option value="active">Active</option>
+            <option value="released">Released</option>
+            <option value="transferred">Transferred</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="notes">Notes</label>
+        <textarea id="notes" class="form-control" rows="3" placeholder="Additional notes..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save Inmate</button>
+        <button type="button" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 export interface Inmate {
   id: string;
@@ -11,7 +12,8 @@ export interface Inmate {
 
 @Component({
   selector: 'app-inmate-list',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './inmate-list.html',
   styleUrls: ['./inmate-list.scss'],
 })

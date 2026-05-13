@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 export interface NavItem {
@@ -12,7 +13,8 @@ export interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.scss'],
 })

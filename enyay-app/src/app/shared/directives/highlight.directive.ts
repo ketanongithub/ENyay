@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]',
-  standalone: false,
+  standalone: true,
 })
 export class HighlightDirective {
   @Input() appHighlight = '#f0f0f0';

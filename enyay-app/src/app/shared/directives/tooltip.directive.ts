@@ -8,7 +8,7 @@ import {
 
 @Directive({
   selector: '[appTooltip]',
-  standalone: false,
+  standalone: true,
 })
 export class TooltipDirective {
   @Input() appTooltip = '';

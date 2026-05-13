@@ -12,7 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 
 @Directive({
   selector: '[appDebounceClick]',
-  standalone: false,
+  standalone: true,
 })
 export class DebounceClickDirective implements OnInit, OnDestroy {
   @Input() debounceTime = 500;

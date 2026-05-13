@@ -1,3 +1,3 @@
-export { AuthInterceptor } from './auth.interceptor';
-export { ErrorInterceptor } from './error.interceptor';
-export { LoggingInterceptor } from './logging.interceptor';
+export { authInterceptor } from './auth.interceptor';
+export { errorInterceptor } from './error.interceptor';
+export { loggingInterceptor } from './logging.interceptor';

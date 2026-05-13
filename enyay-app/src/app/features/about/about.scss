@@ -1,0 +1,58 @@
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1.5rem;
+}
+
+.about-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .version {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    font-style: italic;
+  }
+}
+
+.tech-stack {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+    color: #1f2937;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+
+    li {
+      color: #4b5563;
+      padding: 0.25rem 0;
+    }
+  }
+}

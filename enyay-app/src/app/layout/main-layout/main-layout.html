@@ -1,0 +1,8 @@
+<app-header (toggleSidebar)="onToggleSidebar()"></app-header>
+<app-sidebar [isCollapsed]="isSidebarCollapsed"></app-sidebar>
+<main class="main-content" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</main>
